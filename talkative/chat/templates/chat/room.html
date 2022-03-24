@@ -6,12 +6,36 @@
     <title>Chat Room</title>
 </head>
 <body>
+    {% if user.is_authenticated %}
+     <a href=" ">Logout</a>
+    <div class="card-footer">
+							<form id="send-message-form">
+                                <div class="input-group">
+                                    <div class="input-group-append">
+									    <span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
+                                    </div>
+                                    <input type="text" name="" id="input-message" class="form-control type_msg" placeholder="Type your message...">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-secondary" type="submit">
+                                            <span class="input-group-text send_btn">
+                                                <i class="fas fa-location-arrow"></i>
+                                            </span>
+                                        </button>
 
+                                    </div>
+							</div>
+                      </div>
+						    </form>
+        <h1 style="text-align: end; padding-right: 10px">Logged in as : {{ user.username }}</h1>
+        <input type="hidden" id="logged-in-user" value="{{ user.id }}">
+    {% endif %}
     <textarea id="chat-log" cols="100" rows="20"></textarea><br>
     <input id="chat-message-input" type="text" size="100"><br>
     <input id="chat-message-submit" type="button" value="Send">
     {{ room_name|json_script:"room-name" }}
     <script>
+
+
         const roomName = JSON.parse(document.getElementById('room-name').textContent);
 
         const chatSocket = new WebSocket(

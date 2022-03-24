@@ -28,12 +28,17 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+AUTH_USER_MODEL = "accounts.Account"
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.AllowAllUsersModelBackend',
+    'accounts.backends.CaseInsensitiveModelBackend'
+)
 # Application definition
 
 INSTALLED_APPS = [
     'channels',
     'accounts',
+    'friendship',
     'chat',
     'bootstrap4',
     'django.contrib.admin',
